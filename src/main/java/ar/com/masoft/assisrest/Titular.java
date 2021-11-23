@@ -7,7 +7,9 @@ package ar.com.masoft.assisrest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -17,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -157,6 +160,11 @@ public class Titular implements java.io.Serializable {
     @Basic(optional = true)
     @Column(name = "TIT_ANIOMUERTE")
     private Integer anioMuerte;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "titular")
+    private List<OtrosDatos> otrosDat;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "titular")
+    private List<Pariente> pariente;
     
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)

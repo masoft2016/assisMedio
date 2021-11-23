@@ -60,10 +60,14 @@ public class OtrosDatos implements java.io.Serializable {
     @Basic(optional = false)
     @Column(name = "OTD_ID")
     private Integer id;
-    @JoinColumn(name = "TIT_ID", referencedColumnName = "TIT_ID", insertable = true, updatable = true)
+    @JsonIgnore
+    @JoinColumn(name = "TIT_ID", referencedColumnName = "TIT_ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)    
     private Titular titular;
+    @Basic(optional = false)    
+    @Column(name = "TIT_ID")
+    private Integer titId;
     @Basic(optional = false)    
     @Column(name = "OTD_FECHA")
     @Temporal(TemporalType.TIMESTAMP)
@@ -164,6 +168,10 @@ public class OtrosDatos implements java.io.Serializable {
     @Basic(optional = true)
     @Column(name = "OTD_NOTA", length=65000) // ,columnDefinition = "text"
     private String nota;
+    @Lob
+    @Basic(optional = true)
+    @Column(name = "OTD_AIUTO", length=65000) // ,columnDefinition = "text"
+    private String aiuto;
     @Basic(optional = true)
     @Column(name = "OTD_AYUDA", length=100)
     private String datoAdi1;
@@ -345,5 +353,96 @@ public class OtrosDatos implements java.io.Serializable {
     @Column(name = "AUD_FECHAMOD")    
     private Long audFechaMod;
     private @Version @JsonIgnore Long version;
-    
+
+    public static void APLICA(OtrosDatos original, OtrosDatos modificada){
+        if ((original == null) || (modificada == null)){
+            return;
+        }
+        original.setAbbigliamento( modificada.getAbbigliamento());
+        original.setAffito(modificada.getAffito());
+        original.setAgua(modificada.getAgua());
+        original.setAgua2(modificada.getAgua2());
+        original.setAgua3(modificada.getAgua3());
+        original.setAlojamiento(modificada.getAlojamiento());
+        original.setAltroSpese(modificada.getAltroSpese());
+        original.setAnioCasado(modificada.getAnioCasado());
+        original.setAnioSeparado(modificada.anioSeparado);
+        original.setAutomobile(modificada.getAutomobile());
+        original.setBagni(modificada.getBagni());
+        original.setBagniT(modificada.getBagniT());
+        original.setCamere(modificada.getCamere());
+        original.setCamereT(modificada.getCamereT());
+        original.cochera=modificada.cochera;
+        original.cocheraT=modificada.cocheraT;
+        original.cocina=modificada.cocina;
+        original.cocinaT=modificada.cocinaT;
+        original.conclusion=modificada.conclusion;
+        original.conclusionUff=modificada.conclusionUff;
+        original.confort=modificada.confort;
+        original.contexto=modificada.contexto;
+        original.datoAdi1=modificada.datoAdi1;
+        original.debiti=modificada.debiti;
+        original.docBit=modificada.docBit;
+        original.docCompleta=modificada.docCompleta;
+        original.electrodomestico=modificada.electrodomestico;
+        original.escolaridad=modificada.escolaridad;
+        original.estabilidad=modificada.estabilidad;
+        original.estadocivil=modificada.estadocivil;
+        original.fecConclusion=modificada.fecConclusion;
+        original.fecConclusionUff=modificada.fecConclusionUff;
+        original.fecIndigencia=modificada.fecIndigencia;
+        original.fecha=modificada.fecha;
+        original.galpon=modificada.galpon;
+        original.galponT=modificada.galponT;
+        original.gas=modificada.gas;
+        original.gas2=modificada.gas2;
+        original.gas3=modificada.gas3;
+        original.gastoSalud=modificada.gastoSalud;
+        original.imposte=modificada.imposte;
+        original.indigencia=modificada.indigencia;
+        original.ingresos=modificada.ingresos;
+        original.livelloIndigenza=modificada.livelloIndigenza;
+        original.living=modificada.living;
+        original.livingT=modificada.livingT;
+        original.luz=modificada.luz;
+        original.luz2=modificada.luz2;
+        original.luz3=modificada.luz3;
+        original.mantenimiento=modificada.mantenimiento;
+        original.manutenzione=modificada.manutenzione;
+        original.materiales=modificada.materiales;
+        original.medicamentos=modificada.medicamentos;
+        original.moneda1=modificada.moneda1;
+        original.moneda2=modificada.moneda2;
+        original.muebles=modificada.muebles;
+        original.nota=modificada.nota;
+        original.notaDocumentacion=modificada.notaDocumentacion;
+        original.noteAbitazione=modificada.noteAbitazione;
+        original.obrasocial=modificada.obrasocial;
+        original.ocupacion=modificada.ocupacion;
+        original.otraFuente=modificada.otraFuente;
+        original.otraPropiedad=modificada.otraPropiedad;
+        original.otro=modificada.otro;
+        original.otroT=modificada.otroT;
+        original.patologia=modificada.patologia;
+        original.ph=modificada.ph;
+        original.profesion=modificada.profesion;
+        original.reditoMensual=modificada.reditoMensual;
+        original.reditoMensual2=modificada.reditoMensual2;
+        original.salud=modificada.salud;
+        original.supCubierta=modificada.supCubierta;
+        original.supTerreno=modificada.supTerreno;
+        original.telefono=modificada.telefono;
+        original.telefono2=modificada.telefono2;
+        original.telefono3=modificada.telefono3;
+        original.terminaciones=modificada.terminaciones;
+        original.tipoAlojamiento=modificada.tipoAlojamiento;
+        original.titId=modificada.titId;
+        original.transporto=modificada.transporto;
+        original.tratamiento=modificada.tratamiento;
+        original.viaje=modificada.viaje;
+        original.aiuto=modificada.aiuto;
+        
+        
+        
+    }
 }
