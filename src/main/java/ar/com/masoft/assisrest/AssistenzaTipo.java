@@ -36,7 +36,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class AssistenzaTipo implements java.io.Serializable {
+public class AssistenzaTipo implements java.io.Serializable, ConID{
     @Id
     @TableGenerator(name = "ast",
             table = "numerador",
@@ -60,7 +60,9 @@ public class AssistenzaTipo implements java.io.Serializable {
     @Basic(optional = false)
     @Column(name = "AST_HABILITADO")
     private Boolean habilitado;    
-    
+    @Column(name = "AST_IDVIEJO")
+    @Basic(optional = true)
+    private Integer idViejo;
     
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)

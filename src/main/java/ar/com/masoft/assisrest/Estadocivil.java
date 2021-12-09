@@ -35,7 +35,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Estadocivil implements java.io.Serializable {
+public class Estadocivil implements java.io.Serializable,ConID {
     @Id
     @TableGenerator(name = "eci",
             table = "numerador",
@@ -50,7 +50,8 @@ public class Estadocivil implements java.io.Serializable {
     @Basic(optional = false)
     @Column(name = "ECI_NOMBRE", length=80)
     private String nombre;
-    
+    @Column(name = "ECI_IDVIEJO")
+    private Integer idViejo;
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)
     private String user;

@@ -15,8 +15,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,8 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -43,7 +39,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Conversion implements java.io.Serializable {
+public class Conversion implements java.io.Serializable, ConID {
     @Id
     @TableGenerator(name = "con",
             table = "numerador",
@@ -63,6 +59,8 @@ public class Conversion implements java.io.Serializable {
     private BigDecimal dolar;
     @Column(name = "CON_EURO")
     private BigDecimal euro;
+    @Column(name = "CON_IDVIEJO")
+    private Integer idViejo;
     
     
     

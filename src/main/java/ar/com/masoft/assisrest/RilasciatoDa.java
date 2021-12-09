@@ -35,7 +35,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class RilasciatoDa implements java.io.Serializable {
+public class RilasciatoDa implements java.io.Serializable,ConID {
     @Id
     @TableGenerator(name = "rid",
             table = "numerador",
@@ -50,7 +50,8 @@ public class RilasciatoDa implements java.io.Serializable {
     @Basic(optional = false)
     @Column(name = "RID_NOMBRE", length=80)
     private String nombre;
-    
+    @Column(name = "RID_IDVIEJO")
+    private Integer idViejo;
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)
     private String user;

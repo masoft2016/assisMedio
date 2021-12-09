@@ -58,7 +58,11 @@ public class Assistenza implements java.io.Serializable {
     @JoinColumn(name = "AST_ID", referencedColumnName = "AST_ID", insertable = true, updatable = true)
     @ManyToOne(optional = false)
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-    private AssistenzaTipo assistenzaTipo;
+    private AssistenzaTipo tipo;
+    @JoinColumn(name = "TIT_ID", referencedColumnName = "TIT_ID", insertable = true, updatable = true)
+    @ManyToOne(optional = false)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    private Titular titular;
     @Lob
     @Basic(optional = true)
     @Column(name = "ASS_MOTIVO", length=65000) // ,columnDefinition = "text"
@@ -93,7 +97,7 @@ public class Assistenza implements java.io.Serializable {
     @JoinColumn(name = "ASE_ID", referencedColumnName = "ASE_ID", insertable = true, updatable = true)
     @ManyToOne(optional = false)
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
-    private AssistenzaEstado assistenzaEstado;
+    private AssistenzaEstado estado;
     @Column(name = "AST_FECRICHIESTA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecRichiesta;

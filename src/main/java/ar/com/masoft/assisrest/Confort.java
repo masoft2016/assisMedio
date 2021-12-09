@@ -35,7 +35,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Confort implements java.io.Serializable {
+public class Confort implements java.io.Serializable, ConID {
     @Id
     @TableGenerator(name = "cnf",
             table = "numerador",
@@ -53,6 +53,9 @@ public class Confort implements java.io.Serializable {
     @Basic(optional = false)
     @Column(name = "CNF_CALIDAD")
     private Integer calidad;
+    @Basic(optional = true)
+    @Column(name = "CNF_IDVIEJO")
+    private Integer idViejo;
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)
     private String user;

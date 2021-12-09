@@ -39,7 +39,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Ciudad implements java.io.Serializable {
+public class Ciudad implements java.io.Serializable, ConID {
     @Id
     @TableGenerator(name = "ciu",
             table = "numerador",
@@ -58,7 +58,8 @@ public class Ciudad implements java.io.Serializable {
     @ManyToOne(optional = true)
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Distrito distrito;
-    
+    @Column(name = "CIU_IDVIEJO")
+    private Integer idViejo;
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)
     private String user;
