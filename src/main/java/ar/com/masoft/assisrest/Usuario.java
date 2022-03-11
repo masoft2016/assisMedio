@@ -80,15 +80,11 @@ public class Usuario implements java.io.Serializable {
     private String userMod;
     @CreatedDate
     @Column(name = "AUD_FECHALTA")
-
     private Long audFechaAlta;
     @LastModifiedDate
     @Column(name = "AUD_FECHAMOD")
-
     private Long audFechaMod;
-    private @Version
-    @JsonIgnore
-    Long version;
+    private @Version  @JsonIgnore Long version;
 
     @Transient
     public static String getClaveConvertida(String claveLisa) throws UnsupportedEncodingException, NoSuchAlgorithmException {

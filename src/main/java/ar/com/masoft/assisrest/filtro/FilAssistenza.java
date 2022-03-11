@@ -6,11 +6,15 @@
 package ar.com.masoft.assisrest.filtro;
 
 import ar.com.masoft.assisrest.Distrito;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.LinkedMultiValueMap;
 
 /**
@@ -27,6 +31,12 @@ public class FilAssistenza {
      private Integer estado; // Null o 0 indica que no filtra     
      private Integer distrito;  // Null o 0 indica que no filtra     
      private Integer ciudad;  // Null o 0 indica que no filtra
+     private boolean filFecha;
+     
+     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+     private Date desde;
+     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+     private Date hasta;
      public LinkedMultiValueMap<String, String> getMultiValueMap() {
         LinkedMultiValueMap<String, String> ret  = new LinkedMultiValueMap<>();
         Map map = new HashMap<String, String>();
@@ -62,6 +72,13 @@ public class FilAssistenza {
         
         if (ciudad != null){
             map.put("ciudad", ciudad.toString());
+        }
+        map.put("filFecha", Boolean.toString(filFecha));
+        if (filFecha){
+            
+            Format form=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            map.put("desde", form.format(desde));
+            map.put("hasta", form.format(hasta));
         }
         ret.setAll(map);
         return ret;

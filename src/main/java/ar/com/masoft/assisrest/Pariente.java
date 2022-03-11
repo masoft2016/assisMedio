@@ -44,7 +44,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Pariente implements java.io.Serializable {
+public class Pariente implements java.io.Serializable, ConID{
     @Id
     @TableGenerator(name = "par",
             table = "numerador",
@@ -171,6 +171,8 @@ public class Pariente implements java.io.Serializable {
     @Basic(optional = true)
     @Column(name = "OTD_NOTA", length=65000) // ,columnDefinition = "text"
     private String nota;
+    @Column(name = "PAR_IDVIEJO")
+    private Integer idViejo;
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)
     private String user;

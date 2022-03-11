@@ -46,7 +46,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Titular implements java.io.Serializable {
+public class Titular implements java.io.Serializable, ConID{
     @Id
     @TableGenerator(name = "tit",
             table = "numerador",
@@ -58,6 +58,8 @@ public class Titular implements java.io.Serializable {
     @Basic(optional = false)
     @Column(name = "TIT_ID")
     private Integer id;
+    @Column(name = "TIT_IDVIEJO")
+    private Integer idViejo;
     @Basic(optional = true)
     @Column(name = "OLD_IDPD")
     private Integer idPd;
@@ -154,7 +156,7 @@ public class Titular implements java.io.Serializable {
     @Column(name = "TIT_DATOADI1", length=100)
     private String datoAdi1;
     @Basic(optional = true)
-    @Column(name = "TIT_DATOADI2", length=50)
+    @Column(name = "TIT_DATOADI2", length=150)
     private String datoAdi2;
     
     @Basic(optional = true)

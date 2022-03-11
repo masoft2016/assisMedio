@@ -7,6 +7,7 @@ package ar.com.masoft.assisrest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,7 +45,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Assistenza implements java.io.Serializable {
+public class Assistenza implements java.io.Serializable, ConID {
     @Id
     @TableGenerator(name = "ass",
             table = "numerador",
@@ -102,7 +104,7 @@ public class Assistenza implements java.io.Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecRichiesta;
     @JoinColumn(name = "RIC_USU_ID", referencedColumnName = "USU_ID", insertable = true, updatable = true)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Usuario usuRichiesta;
     
@@ -110,10 +112,11 @@ public class Assistenza implements java.io.Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecPropuesta;
     @JoinColumn(name = "PRO_USU_ID", referencedColumnName = "USU_ID", insertable = true, updatable = true)
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Usuario usuPropuesta;
-    
+    @Column(name = "ASS_IDVIEJO")
+    private Integer idViejo;
     
     @CreatedBy
     @Column(name = "AUD_USUALTA", length=50)
@@ -128,4 +131,27 @@ public class Assistenza implements java.io.Serializable {
     @Column(name = "AUD_FECHAMOD")    
     private Long audFechaMod;
     private @Version @JsonIgnore Long version;
+    @Transient
+    private List<Cuotas> cuotas;
+    
+    public static void APLICA(Assistenza original, Assistenza modificada){
+        original.setConclusionC(modificada.getConclusionC());
+        original.setConclusionM(modificada.getConclusionM());
+        original.setEstado(modificada.getEstado());
+        original.setFarmacia(modificada.getFarmacia());
+        original.setFecEstado( modificada.getFecEstado());
+        original.setFecPropuesta(modificada.getFecPropuesta());
+        original.setFecRichiesta( modificada.getFecRichiesta());
+        original.setFecha( modificada.getFecha());
+        original.setLegal( modificada.getLegal());
+        original.setMotivo(modificada.getMotivo());
+        original.setNota( modificada.getNota());
+        original.setSanitaria( modificada.getSanitaria());
+        original.setTipo( modificada.getTipo());
+        original.setTitular( modificada.getTitular());
+        original.setUsuPropuesta( modificada.getUsuPropuesta());
+        original.setUsuRichiesta( modificada.getUsuRichiesta());
+        original.setUsuarioM( original.getUsuarioM());
+        
+    }
 }

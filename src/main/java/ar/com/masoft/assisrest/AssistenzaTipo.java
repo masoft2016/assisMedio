@@ -42,7 +42,7 @@ public class AssistenzaTipo implements java.io.Serializable, ConID{
             table = "numerador",
             pkColumnName = "tipo",
             valueColumnName = "numero",
-            pkColumnValue = "AST    ",
+            pkColumnValue = "AST",
             allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ast")
     @Basic(optional = false)
